@@ -1,9 +1,5 @@
 package com.adel.booking;
 
-import com.adel.car.Car;
-
-import java.awt.print.Book;
-
 public class BookingDao {
     private static final Booking[] bookings;
     private static int bookingsCount;
