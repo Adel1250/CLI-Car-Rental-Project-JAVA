@@ -1,7 +1,7 @@
-package user;
+package com.adel.user;
 
 public class UserService {
-    private final UserDao userDao = new UserDao();
+    private static final UserDao userDao = new UserDao();
 
     public User[] getAllUsers() {
         return userDao.getAllUsers();

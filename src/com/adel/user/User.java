@@ -1,4 +1,4 @@
-package user;
+package com.adel.user;
 
 import java.util.Objects;
 

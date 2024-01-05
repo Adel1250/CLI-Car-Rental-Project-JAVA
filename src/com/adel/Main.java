@@ -1,10 +1,16 @@
-import user.UserService;
+package com.adel;
+
+import com.adel.booking.Booking;
+import com.adel.booking.BookingService;
+import com.adel.user.UserService;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     private static final UserService userService = new UserService();
+    private static final BookingService bookingService = new BookingService();
+
     public static void main(String[] args) {
         String[] options = {
                 "1- Book Car",
@@ -22,17 +28,27 @@ public class Main {
             for (String option : options) {
                 System.out.println(option);
             }
+            String userUUID;
             String choice = sc.next();
             switch (choice) {
                 case "1":
+                    userUUID = sc.next();
+                    String carID = sc.next();
+                    Booking booking = new Booking(userUUID, carID);
+                    bookingService.addNewBooking(booking);
                     break;
                 case "2":
+                    userUUID = sc.next();
+                    System.out.println(Arrays.toString(bookingService.findUserBookedCars(userUUID)));
                     break;
                 case "3":
+                    System.out.println(Arrays.toString(bookingService.getAllBookings()));
                     break;
                 case "4":
+                    System.out.println(Arrays.toString(bookingService.findUnbookedCars()));
                     break;
                 case "5":
+                    System.out.println(Arrays.toString(bookingService.getAvailableElectricCars()));
                     break;
                 case "6":
                     System.out.println(Arrays.toString(userService.getAllUsers()));

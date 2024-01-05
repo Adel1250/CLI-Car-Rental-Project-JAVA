@@ -1,4 +1,4 @@
-package user;
+package com.adel.user;
 
 public class UserDao {
     private static final User[] users;
