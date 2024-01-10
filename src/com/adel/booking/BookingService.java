@@ -1,31 +1,31 @@
 package com.adel.booking;
 
 import com.adel.car.Car;
-import com.adel.car.CarDao;
+import com.adel.car.CarArrayDataAccessService;
 
 public class BookingService {
-    private static final BookingDao bookingDao = new BookingDao();
-    private static final CarDao carDao = new CarDao();
+    private static final BookingArrayDataAccessService BOOKING_ARRAY_DATA_ACCESS_SERVICE = new BookingArrayDataAccessService();
+    private static final CarArrayDataAccessService CAR_ARRAY_DATA_ACCESS_SERVICE = new CarArrayDataAccessService();
 
     public Booking[] getAllBookings() {
-        return bookingDao.getAllBookings();
+        return BOOKING_ARRAY_DATA_ACCESS_SERVICE.getAllBookings();
     }
 
     public void addNewBooking(Booking booking) {
-        if (bookingDao.findBookingByCarID(booking.getCarID()) != null) {
+        if (BOOKING_ARRAY_DATA_ACCESS_SERVICE.findBookingByCarID(booking.getCarID()) != null) {
             System.out.println("Car is already booked. Try again later!");
             return;
         }
-        bookingDao.insertBooking(booking);
+        BOOKING_ARRAY_DATA_ACCESS_SERVICE.insertBooking(booking);
     }
 
     public Car[] findUserBookedCars(String userID) {
-        Booking[] bookings = bookingDao.findBookingsByUserID(userID);
+        Booking[] bookings = BOOKING_ARRAY_DATA_ACCESS_SERVICE.findBookingsByUserID(userID);
         Car[] bookedCars = new Car[10];
         int count = 0;
         for (Booking booking : bookings) {
             if (booking != null) {
-                Car car = carDao.findCarByID(booking.getCarID());
+                Car car = CAR_ARRAY_DATA_ACCESS_SERVICE.findCarByID(booking.getCarID());
                 if (car != null) {
                     bookedCars[count] = car;
                 }
@@ -36,10 +36,10 @@ public class BookingService {
 
     public Car[] findUnbookedCars() {
         Car[] unbookedCars = new Car[10];
-        Car[] cars = carDao.getAllCars();
+        Car[] cars = CAR_ARRAY_DATA_ACCESS_SERVICE.getAllCars();
         int count = 0;
         for (Car car : cars) {
-            if (bookingDao.findBookingByCarID(car.getId()) == null) {
+            if (car != null && BOOKING_ARRAY_DATA_ACCESS_SERVICE.findBookingByCarID(car.getId()) == null) {
                 unbookedCars[count] = car;
                 count++;
             }
