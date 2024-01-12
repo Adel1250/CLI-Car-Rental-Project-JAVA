@@ -1,15 +1,18 @@
 package com.adel;
 
 import com.adel.booking.Booking;
+import com.adel.booking.BookingArrayDataAccessService;
 import com.adel.booking.BookingService;
+import com.adel.car.CarArrayDataAccessService;
+import com.adel.user.UserArrayDataAccessService;
 import com.adel.user.UserService;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    private static final UserService userService = new UserService();
-    private static final BookingService bookingService = new BookingService();
+    private static final UserService userService = new UserService(new UserArrayDataAccessService());
+    private static final BookingService bookingService = new BookingService(new BookingArrayDataAccessService(), new CarArrayDataAccessService());
 
     public static void main(String[] args) {
         String[] options = {

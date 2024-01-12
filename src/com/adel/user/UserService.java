@@ -1,9 +1,13 @@
 package com.adel.user;
 
 public class UserService {
-    private static final UserArrayDataAccessService USER_ARRAY_DATA_ACCESS_SERVICE = new UserArrayDataAccessService();
+    private final UserArrayDataAccessService userArrayDataAccessService;
+
+    public UserService(UserArrayDataAccessService userArrayDataAccessService) {
+        this.userArrayDataAccessService = userArrayDataAccessService;
+    }
 
     public User[] getAllUsers() {
-        return USER_ARRAY_DATA_ACCESS_SERVICE.getAllUsers();
+        return userArrayDataAccessService.getAllUsers();
     }
 }
